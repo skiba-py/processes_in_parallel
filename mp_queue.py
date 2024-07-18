@@ -21,14 +21,13 @@ class ProcessController:
         self.max_procs = n
 
     def start(self, tasks: list, max_exec_time: int) -> None:
-        """Помещает в очередь все задания из tasks
-        и запускает их параллельно.
-        """
+        """Помещает в очередь все задания из tasks."""
         for task in tasks:
             self.queue.put((task, max_exec_time))
             self.count_of_tasks += 1
 
     def _run_processes(self):
+        """Запускает задания из очереди."""
         while True:
             proc_to_remove = []
             for p, end_time in self.running_processes.items():
